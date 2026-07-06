@@ -3,7 +3,6 @@ import styles from "./PageNav.module.css";
 import Logo from "./Logo";
 
 export default function PageNav() {
-  console.log("Hello");
   return (
     <>
       <nav className={styles.nav}>

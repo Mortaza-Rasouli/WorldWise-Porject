@@ -25,7 +25,7 @@ export default function Map() {
     getPosition,
   } = useGeolocation();
 
-  const { mapLat, mapLng } = useUrlPosition();
+  const [mapLat, mapLng] = useUrlPosition();
 
   useEffect(
     function () {
@@ -80,7 +80,11 @@ export default function Map() {
 
 function ChangeCenter({ position }) {
   const map = useMap();
-  map.setView(position);
+
+  useEffect(() => {
+    map.setView(position);
+  }, [map, position]);
+
   return null;
 }
 
@@ -88,6 +92,10 @@ function DetectClick() {
   const navigate = useNavigate();
 
   useMapEvent({
-    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+    click(e) {
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+    },
   });
+
+  return null;
 }

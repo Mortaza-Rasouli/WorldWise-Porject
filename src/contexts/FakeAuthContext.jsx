@@ -41,10 +41,11 @@ function AuthProvider({ children }) {
   function logout() {
     dispatch({ type: "logout" });
   }
+
   return (
-    <AuthProvider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
       {children}
-    </AuthProvider>
+    </AuthContext.Provider>
   );
 }
 

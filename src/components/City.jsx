@@ -17,16 +17,14 @@ function City() {
   const { id } = useParams();
   const { getCity, currentCity, isLoading } = useCities();
 
-  useEffect(
-    function () {
-      getCity(id);
-    },
-    [id,getCity],
-  );
+  useEffect(() => {
+    getCity(id);
+  }, [id]);
 
   const { cityName, emoji, date, notes } = currentCity;
 
   if (isLoading) return <Spinner />;
+
   return (
     <div className={styles.city}>
       <div className={styles.row}>
@@ -38,7 +36,7 @@ function City() {
 
       <div className={styles.row}>
         <h6>You went to {cityName} on</h6>
-        <p>{formatDate(date || null)}</p>
+        <p>{date ? formatDate(date) : ""}</p>
       </div>
 
       {notes && (
@@ -59,9 +57,7 @@ function City() {
         </a>
       </div>
 
-      <div>
-        <BackButton />
-      </div>
+      <BackButton />
     </div>
   );
 }
